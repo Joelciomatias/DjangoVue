@@ -1,5 +1,22 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Hello word</h1>
+<div class="container">
+    
+    <table class="table">
+        <thead>
+            <th>Titulo</th>
+            <th>Plataforma</th>
+        </thead>
+        <tbody>
+            {% for game in games %}
+            <tr>
+                <td>{{ game.titulo }}</td>
+                <td>{{ game.plataformas }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
+
