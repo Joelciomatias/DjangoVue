@@ -8,8 +8,8 @@
         <tbody>
             
             <tr v-for="game in lista" :key="game.id"> 
-                <td>{{ game.titulo }}</td>
-                <td>{{ game.plataformas }}</td>
+                <td>{{ game.fields.titulo }}</td>
+                <td>{{ game.fields.plataformas }}</td>
             </tr>
             
         </tbody>

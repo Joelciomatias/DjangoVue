@@ -1,13 +1,22 @@
 var path = require('path')
 var webpack = require('webpack')
+var projectRoot = process.env.PWD; // Absolute path to the project root
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './static/js/App.js',
     output: {
-        path: path.resolve(__dirname, './static/public'),
+        path: path.join(__dirname, './static/public'),
         publicPath: '/static/public/',
         filename: 'bundle.js'
     },
+    // plugins: [
+    //     new HtmlWebpackPlugin({
+    //         title: 'ngRedux Async',
+    //         template: './homepage/templates/homepage/index.html',
+    //         inject: 'body'
+    //     })
+    // ],
     module: {
         rules: [
             {
@@ -21,8 +30,19 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            },
+            {
+                test: /\.html$/,
+                use: [{
+                    loader: 'html-loader'
+                }]
             },
             {
                 test: /\.(png|jpg|gif|svg)$/,
@@ -38,6 +58,7 @@ module.exports = {
     },
     devtool: '#eval-source-map'
 }
+
 
 if (process.env.NODE_ENV === 'production')
 {
