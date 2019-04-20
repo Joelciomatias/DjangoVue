@@ -1,56 +1,27 @@
-# Created by https://www.gitignore.io
+Skip to content
 
-### OSX ###
+Search…
+All gists
+GitHub
+New gist
+@Williamlee12
+0 @Williamlee12Williamlee12/.gitignore
+Created 4 days ago
+
+<script src="https://gist.github.com/Williamlee12/c832c79d78146937ca4b006c4488c015.js"></script>
+
+ Code  Revisions 1
+ .gitignore
 .DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-Icon
-
-# vscode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-
-### Python ###
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-
-# C extensions
-*.so
-
-#npm vue
-.DS_Store
-/node_modules/
+node_modules/
 /dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-/test/e2e/reports
-selenium-debug.log
-
 
 # Editor directories and files
 .idea
+.vscode
 *.suo
 *.ntvs*
 *.njsproj
@@ -59,7 +30,6 @@ selenium-debug.log
 # Distribution / packaging
 .Python
 env/
-build/
 develop-eggs/
 dist/
 downloads/
@@ -111,3 +81,22 @@ local_settings.py
 
 .env
 db.sqlite3
+ @Williamlee12
+
+
+
+Leave a comment
+Attach files by dragging & dropping, , or pasting from the clipboard.  Styling with Markdown is supported
+© 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+API
+Training
+Shop
+Blog
+About
+Press h to open a hovercard with more details.
