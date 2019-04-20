@@ -23,7 +23,8 @@ export default {
       FetchData: function() {
           var app = this;
           axios.get(process.env.API_URL + "/api_example/").then(response => {
-              app.names = response.data.names;
+              // app.names = response.data.names;
+              console.log(response.data);
           });
       },
       SelectWinner: function() {
