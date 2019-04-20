@@ -4,3 +4,7 @@ django-cors-headers==2.3.0
 gunicorn==19.9.0
 pytz==2018.5
 whitenoise==3.3.1
+oauth2==1.9.0.post1
+urllib3==1.23
+
+

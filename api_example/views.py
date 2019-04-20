@@ -1,7 +1,6 @@
 import oauth2
 import json
 import urllib.parse
-import pprint
 
 from django.http import JsonResponse
 def topics(request,region_id):
