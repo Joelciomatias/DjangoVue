@@ -2,7 +2,7 @@
   "name": "django_vue_template",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "William Lee <williamgnlee@googlemail.com>",
+  "author": "Joelcio Matias",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bootstrap": "^4.3.1",
+    "bootstrap-vue": "^2.0.0-rc.18",
     "vue": "^2.5.2"
   },
   "devDependencies": {

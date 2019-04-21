@@ -1,13 +1,16 @@
 <template>
   <div id="app">
+    <img src="../static/Twitter_logo_blue.png" width='' height=''  alt="Fluid-grow image"/>
+
     <ul id="example-1">
       <div v-for="item in topics">
-        <a :href="item.url" target="_blank">
+        <b-link :href="item.url" target="_blank">
           <li>{{ item.name }}</li>
-        </a>
+        </b-link>
       </div>
     </ul>
     <br/>
+    
     <input type="text" id="search-here">
     <button @click="searchTwittes()">Search twittes</button>
       <div v-for="item in twittes">
@@ -15,20 +18,18 @@
             <li>{{ item.screen_name +' - '+item.name}}</li>
             <p>{{item.text}}</p>
             <hr/>
-          <!-- </a> -->
       </div>
   </div>
+  
 </template>
 <script>
 import axios from 'axios';
+// import func from '../vue-temp/vue-editor-bridge';
 export default {
   name: 'App',
   data() {
     return {
-      items: [
-        { message: 'Algo' },
-        { message: 'Outro' }
-      ],
+        mainProps: { width: 500, height: 400, class: 'm1' },
         twittes:null,
         topics:null
       }
@@ -41,10 +42,13 @@ export default {
         var app = this;
         var topics = null;
         axios.get(process.env.API_URL + "/api_example/topics/23424768/").then(response => {
-            topics = response.data.topics
+          topics = response.data.topics
             topics = topics.slice(0,5)
             console.log(topics);
             this.topics = topics
+        }).catch((err) => {
+            console.error(err);
+            alert(`Houve um erro ao carregar dados(${err.status.code}): `)
         });
       },
       searchTwittes: function() {
