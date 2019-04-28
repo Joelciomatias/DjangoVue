@@ -6,12 +6,12 @@
         <img id="logo" src="../../static/Twitter_logo_blue.png" width='' height=''  alt="Fluid-grow image"/>
       </b-col>
       <b-col></b-col>
-    </b-row class="text-center">
+    </b-row>
     <div id=container>
-      <b-row>
-        <b-col>
-          <h4>Trending Now</h4>
+      <b-row >
+        <b-col class="text-left">
           <ul id="example-1">
+          <h4 class="text-left">Trending Now</h4>
             <div v-for="item in topics">
               <b-link :href="item.url" target="_blank">
                 <li>{{ item.name }}</li>
@@ -19,8 +19,9 @@
             </div>
           </ul>
         </b-col>
-        <b-col>
-          <ul id="example-1">
+        <b-col class="text-left">
+            <h4 id="example-2">Trending Now</h4>
+          <ul >
             <div v-for="item in topics2">
               <b-link :href="item.url" target="_blank">
                 <li>{{ item.name }}</li>
@@ -30,11 +31,7 @@
         </b-col>
       </b-row>
       <br/>
-      <b-row class="text-center">
-        <b-col cols="12">
-          <search></search>
-        </b-col>
-      </b-row>
+      <search></search>
     </div>
   </div>
 </template>
@@ -84,6 +81,9 @@ padding-top: 20px;
 }
 h4 {
   color: #5E9FCA;
+}
+#example-2{
+  color:#F5F5F5;
 }
 ul li {
   list-style-type: none;

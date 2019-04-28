@@ -1,25 +1,38 @@
 <template>
   <div id="results">
-    <!-- <input type="text" id="search-here"> -->
     <!-- <mdbInput label="Username" icon="user" /> -->
-    <b-input-group>
-      <b-input-group-prepend>
-        <span class="input-group-text"><i src="../../static/Icon_search_big.png" 
-        class="fa fa-search fa-lg"></i></span>
-      </b-input-group-prepend>
-      <b-form-input id="search-here" class="LoginInput" size="lg" placeholder="Buscar Tweets">
-      </b-form-input>
-        <b-input-group-append>
-          <b-button @click="searchTwittes()" variant="info"><i class="fa fa-arrow-right"  aria-hidden="true"></i></b-button>
-        </b-input-group-append>
-    </b-input-group>
+      <b-row class="text-center">        
+        <b-col cols="12">
+          <b-input-group>
+            <b-input-group-prepend>
+              <span class="input-group-text">
+                <img class="search-icon" src="../../static/Icon_search_big.png"/>
+              </span>
+            </b-input-group-prepend>
+            <b-form-input @keyup="searchTwittes(null)" 
+                          id="search-here" 
+                          class="LoginInput" 
+                          size="lg" 
+                          placeholder="Buscar Tweets"></b-form-input>
+          </b-input-group>
+        </b-col>
+      </b-row>
     <br/>
-      <div v-for="item in twittes">
-            <img :alt="item.screen_name" :src="item.image_url"/>
-            <li>{{ item.screen_name +' - '+item.name}}</li>
-            <p>{{item.text}}</p>
-            <hr/>
-      </div>
+      <b-list-group>
+        <div v-for="item in twittes">
+        <b-list-group-item href="#" active class="flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{item.screen_name}}</h5>
+            <small>{{item.name}}</small>
+          </div>
+          <p class="mb-1">
+            {{item.text}}
+          </p>
+          <!-- <small></small> -->
+        </b-list-group-item>
+        <hr/>
+        </div>
+    </b-list-group>
   </div>
 </template>
 <script>
@@ -42,7 +55,7 @@ export default {
   mounted: function() {
   },
   methods: {
-    searchTwittes: function() {
+    searchTwittes: function(searchTerm) {
       let query = document.getElementById('search-here').value || 'brasil'
       fetchTwettsSearch(query).then(res => {
         this.twittes = res.data.twittes
@@ -64,6 +77,14 @@ export default {
 }
 .UniqueFullWidth .LoginInput {
   border-left: none;
+}
+.input-group {
+  /* max-width: 500px; */
+  padding:2% 7%;
+}
+.search-icon{
+  height: 30px;
+  width: 30px;
 }
 
 </style>
