@@ -1,15 +1,33 @@
 <template>
   <div id="home">
-    <img src="../../static/Twitter_logo_blue.png" width='' height=''  alt="Fluid-grow image"/>
-    <ul id="example-1">
-      <div v-for="item in topics">
-        <b-link :href="item.url" target="_blank">
-          <li>{{ item.name }}</li>
-        </b-link>
-      </div>
-    </ul>
-    <br/>
-    <search></search>
+    <b-row class="text-center">
+    <b-col></b-col>
+    <b-col cols="8">
+      <img id="logo" src="../../static/Twitter_logo_blue.png" width='' height=''  alt="Fluid-grow image"/>
+    </b-col>
+    <b-col></b-col>
+  </b-row class="text-center">
+    <div id=container>
+       <b-row>
+    <b-col></b-col>
+    <b-col>
+      <ul id="example-1">
+        <div v-for="item in topics">
+          <b-link :href="item.url" target="_blank">
+            <li>{{ item.name }}</li>
+          </b-link>
+        </div>
+      </ul>
+
+    </b-col>
+  </b-row>
+      <br/>
+      <b-row class="text-center">
+        <b-col cols="12">
+        <search></search>
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 <script>
@@ -44,4 +62,14 @@ export default {
 }
 </script>
 <style>
+#home {
+  background-color: #F5F5F5
+}
+#container{
+
+}
+#logo{
+  /* margin-left: 40%; */
+}
+/* blue #5E9FCA */
 </style>
