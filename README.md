@@ -13,8 +13,13 @@ npm install
 
 # build for production with minification
 npm run build
+# run server application
+npm run start
 
 # install Python dependencies
 pip install -r requirements.txt
 ```
 You will want to adjust the SECRET_KEY in the /.env file to something a little more secure
+
+# run python api in dev
+python manage.py runserver
