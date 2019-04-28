@@ -24,6 +24,7 @@
 </template>
 <script>
 import axios from 'axios';
+import { fetchTrendingTopics, fetchTwettsSearch } from './services/http'
 // import func from '../vue-temp/vue-editor-bridge';
 export default {
   name: 'App',
@@ -35,30 +36,23 @@ export default {
       }
   },
   mounted: function() {
-    this.getTrendingTopics();
-  },
+    this.getTrendingTopics()
+    },
   methods: {
-      getTrendingTopics: function() {
-        var app = this;
-        var topics = null;
-        axios.get(process.env.API_URL + "/api_example/topics/23424768/").then(response => {
-          topics = response.data.topics
-            topics = topics.slice(0,5)
-            console.log(topics);
-            this.topics = topics
-        }).catch((err) => {
-            console.error(err);
-            alert(`Houve um erro ao carregar dados(${err.status.code}): `)
-        });
-      },
-      searchTwittes: function() {
-        var app = this;
-        var query = document.getElementById('search-here').value || 'brasil'
-        axios.get(process.env.API_URL + `/api_example/search/${query}/`).then(response => {
-            console.log(response.data.twittes);
-            this.twittes = response.data.twittes
-        });
-      },
+    getTrendingTopics: function() {
+      let regionId = 23424768
+      fetchTrendingTopics(regionId).then(res => {
+        this.topics = res.data.topics.slice(0,5)
+        // console.log(this.topics);
+      })
+    },
+    searchTwittes: function() {
+      let query = document.getElementById('search-here').value || 'brasil'
+      fetchTwettsSearch(query).then(res => {
+        this.twittes = res.data.twittes
+        // console.log(res.data.twittes);
+      })
+    },
   }
 }
 </script>

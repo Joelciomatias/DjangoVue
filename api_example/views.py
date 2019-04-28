@@ -15,11 +15,16 @@ def topics(request,region_id):
     requisicao = cliente.request('https://api.twitter.com/1.1/trends/place.json?id=' + str(region_id))
     decodificar = requisicao[1].decode()
     trending = json.loads(decodificar)
-    topics = trending[0]['trends']
-    my_list = []
-    for topic in topics:
-        my_list.append({'name':topic['name'],'url':topic['url']})
-    return JsonResponse({'topics':my_list})  
+    # print('result: ',trending['errors'])
+    if 'errors' in trending:
+        print(trending['errors'])
+        return JsonResponse({'errors':trending['errors']})              
+    else:
+        topics = trending[0]['trends']
+        my_list = []
+        for topic in topics:
+            my_list.append({'name':topic['name'],'url':topic['url']})
+        return JsonResponse({'topics':my_list})  
 def search(request,query):
     comsumer_key = 'wk6YZttOzS50DvnvZvDwizULk'
     comsumer_secret = 'z1VbsaPJijbjzpJ1R9T2CY6LinUkBY2rsTgeQe2T6XlAH2jCKu'
