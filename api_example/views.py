@@ -1,6 +1,7 @@
 import oauth2
 import json
 import urllib.parse
+import pprint
 
 from django.http import JsonResponse
 def topics(request,region_id):
@@ -40,10 +41,12 @@ def search(request,query):
     twittes = objeto['statuses']
     my_list = []
     for twit in twittes:
+        pprint.pprint(twit)
         my_list.append({
             'name':twit['user']['name'],
             'screen_name':twit['user']['screen_name'],
             'image_url':twit['user']['profile_image_url_https'],
-            'text':twit['text']
+            'text':twit['text'],
+            'id':twit['id_str']
         })
     return JsonResponse({'twittes': my_list})

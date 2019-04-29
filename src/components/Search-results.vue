@@ -20,14 +20,17 @@
     <br/>
       <b-list-group>
         <div v-for="item in twittes">
-        <b-list-group-item href="#" active class="flex-column align-items-start">
+        <b-list-group-item 
+        active class="flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{item.screen_name}}</h5>
             <small>{{item.name}}</small>
           </div>
+          <b-link id="t-link" :href="'https://twitter.com/'+item.screen_name+'/status/'+item.id" target="_blank">
           <p class="mb-1">
             {{item.text}}
           </p>
+          </b-link>
           <!-- <small></small> -->
         </b-list-group-item>
         <hr/>
@@ -85,6 +88,10 @@ export default {
 .search-icon{
   height: 30px;
   width: 30px;
+}
+#t-link {
+  text-decoration: none;
+  color: inherit;
 }
 
 </style>
