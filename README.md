@@ -20,6 +20,10 @@ npm run start
 pip install -r requirements.txt
 ```
 You will want to adjust the SECRET_KEY in the /.env file to something a little more secure
-
+# generate your api in twitter and put in your current operating system
+CONSUMER_KEY
+CONSUMER_SECRET
+TOKEN_KEY
+TOKEN_SECRET
 # run python api in dev
 python manage.py runserver
