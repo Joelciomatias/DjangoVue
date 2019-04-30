@@ -10,6 +10,7 @@ def topics(request,region_id):
     comsumer_secret = os.environ.get('CONSUMER_SECRET')
     token_key = os.environ.get('TOKEN_KEY')
     token_secret = os.environ.get('TOKEN_SECRET')
+    print(' consumerkey: ',comsumer_key,'\n','consumersecret: ',comsumer_secret,'\n','token_key: ',token_key,'\n','token_secret: ',token_secret)
     comsumer = oauth2.Consumer(comsumer_key, comsumer_secret)
     token = oauth2.Token(token_key, token_secret)
     cliente = oauth2.Client(comsumer, token)
