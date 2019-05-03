@@ -23,6 +23,9 @@
         <b-list-group-item 
         active class="flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
+            <b-link id="i-link" :href="'https://twitter.com/'+item.screen_name" target="_blank">
+              <b-img id="p_image" :src="item.image_url" ledt="true" height="40" width="40" v-bind="mainProps" rounded="circle" alt="Circle image"></b-img>
+            </b-link>
             <h5 class="mb-1">{{item.screen_name}}</h5>
             <small>{{item.name}}</small>
           </div>
@@ -83,7 +86,7 @@ export default {
 }
 .input-group {
   /* max-width: 500px; */
-  padding:2% 7%;
+  padding:2% 5%;
 }
 .search-icon{
   height: 30px;
@@ -93,5 +96,10 @@ export default {
   text-decoration: none;
   color: inherit;
 }
-
+#p_image {
+  margin-left: -5px;
+}
+h5 {
+    margin:5px auto 0 5px;
+}
 </style>
