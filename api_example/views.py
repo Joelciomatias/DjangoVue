@@ -11,11 +11,12 @@ token_key = '1117253226645086208-ySD1QakpKdnrYF6BHoa6Cbfap2JX03'
 token_secret = 'p8V8auERryx11lcPYTH4oW7Sa5GpodSenmYJ62CcDCeAa'
 comsumer = oauth2.Consumer(comsumer_key, comsumer_secret)
 token = oauth2.Token(token_key, token_secret)
-cliente = oauth2.Client(comsumer, token)
+
 
 def topics(request,region_id):
     # trending topics
     print(' consumerkey: ',comsumer_key,'\n','consumersecret: ',comsumer_secret,'\n','token_key: ',token_key,'\n','token_secret: ',token_secret)
+    cliente = oauth2.Client(comsumer, token)
     requisicao = cliente.request('https://api.twitter.com/1.1/trends/place.json?id=' + str(region_id))
     decodificar = requisicao[1].decode()
     trending = json.loads(decodificar)
@@ -31,6 +32,7 @@ def topics(request,region_id):
         return JsonResponse({'topics':my_list}) 
 
 def search(request,query):
+    cliente = oauth2.Client(comsumer, token)
     query_codificada = urllib.parse.quote(query)
     requisicao = cliente.request('https://api.twitter.com/1.1/search/tweets.json?q='+query_codificada+'&lang=pt')
     decodificar = requisicao[1].decode()

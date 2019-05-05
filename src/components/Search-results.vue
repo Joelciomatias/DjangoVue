@@ -1,6 +1,5 @@
 <template>
   <div id="results">
-    <!-- <mdbInput label="Username" icon="user" /> -->
       <b-row class="text-center">        
         <b-col cols="12">
           <b-input-group>
@@ -9,11 +8,13 @@
                 <img class="search-icon" src="../../static/Icon_search_big.png"/>
               </span>
             </b-input-group-prepend>
-            <b-form-input @keyup="searchTwittes(null)" 
-                          id="search-here" 
+            <b-form-input id="search-here" 
                           class="LoginInput" 
                           size="lg" 
                           placeholder="Buscar Tweets"></b-form-input>
+            <b-input-group-append>
+              <b-button size="sm" text="Button" @click="searchTwittes(null)" variant="primary">Buscar</b-button>
+            </b-input-group-append>
           </b-input-group>
         </b-col>
       </b-row>
@@ -27,14 +28,12 @@
               <b-img id="p_image" :src="item.image_url" ledt="true" height="40" width="40" v-bind="mainProps" rounded="circle" alt="Circle image"></b-img>
             </b-link>
             <h5 class="mb-1">{{item.screen_name}}</h5>
-            <small>{{item.name}}</small>
           </div>
           <b-link id="t-link" :href="'https://twitter.com/'+item.screen_name+'/status/'+item.id" target="_blank">
           <p class="mb-1">
             {{item.text}}
           </p>
           </b-link>
-          <!-- <small></small> -->
         </b-list-group-item>
         <hr/>
         </div>
@@ -45,7 +44,6 @@
 
 import { mdbInput } from 'mdbvue';
 import { fetchTrendingTopics, fetchTwettsSearch } from '.././services/http'
-// import func from '../vue-temp/vue-editor-bridge';
 export default {
   name: 'Search',
   componens: {
@@ -55,7 +53,7 @@ export default {
     return {
         mainProps: { width: 500, height: 400, class: 'm1' },
         twittes:null,
-        topics:null
+        topics:null,
       }
   },
   mounted: function() {
@@ -63,9 +61,13 @@ export default {
   methods: {
     searchTwittes: function(searchTerm) {
       let query = document.getElementById('search-here').value || 'brasil'
+      query = searchTerm || query
       fetchTwettsSearch(query).then(res => {
         this.twittes = res.data.twittes
-        console.log(res.data.twittes);
+        if(!searchTerm){
+          this.$emit('newSearch', query)
+        }
+        // console.log(res.data.twittes);
       })
     },
   }

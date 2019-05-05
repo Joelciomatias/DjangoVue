@@ -10,7 +10,7 @@
     <div id=container>
       <b-row >
         <b-col class="text-left">
-          <ul id="example-1">
+          <ul class="home-list">
           <h4 class="text-left">Trending Now</h4>
             <div v-for="item in topics">
               <b-link :href="item.url" target="_blank">
@@ -20,18 +20,18 @@
           </ul>
         </b-col>
         <b-col class="text-left">
-            <h4 id="example-2">Trending Now</h4>
-          <ul >
-            <div v-for="item in topics2">
-              <b-link :href="item.url" target="_blank">
-                <li>{{ item.name }}</li>
+          <ul class="home-list">
+            <h4>Recent Searches</h4>
+            <div v-for="item in searches">
+            <b-link href="" @click="researchTerm(item)">
+                <li>{{ item }}</li>
               </b-link>
             </div>
           </ul>
         </b-col>
       </b-row>
       <br/>
-      <search></search>
+      <search @newSearch="updateSearchs" ref="child"></search>
     </div>
   </div>
 </template>
@@ -49,7 +49,7 @@ export default {
         mainProps: { width: 500, height: 400, class: 'm1' },
         twittes:null,
         topics:null,
-        topics2:null
+        searches:[],
       }
   },
   mounted: function() {
@@ -60,10 +60,18 @@ export default {
       let regionId = 23424768
       fetchTrendingTopics(regionId).then(res => {
         this.topics = res.data.topics.slice(0,5)
-        this.topics2 = res.data.topics.slice(5,10)
-        // console.log(this.topics);
       })
     },
+    updateSearchs: function(value){
+      this.searches.push(value);
+      if(this.searches.length > 5){
+        this.searches.shift()
+      }
+    },
+    researchTerm: function(item){
+      // this.$emit('click-term', item)
+      this.$refs.child.searchTwittes(item)
+    }
   }
 }
 </script>
@@ -73,11 +81,11 @@ export default {
   padding: 50px 15px 15px 15px;
   min-height: 50rem;
 }
-#container{
-padding-top: 20px;
+#container {
+  padding-top: 20px;
 }
-#logo{
-  /* margin-left: 40%; */
+#logo {
+
 }
 h4 {
   color: #5E9FCA;
@@ -87,6 +95,7 @@ h4 {
 }
 ul li {
   list-style-type: none;
+  color: #5E9FCA;
 }
 /* blue #5E9FCA */
 </style>
