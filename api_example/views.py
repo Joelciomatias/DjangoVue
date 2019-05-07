@@ -1,3 +1,6 @@
+    # importing the requests library 
+import requests 
+import datetime
 import oauth2
 import json
 import urllib.parse
@@ -15,7 +18,7 @@ token = oauth2.Token(token_key, token_secret)
 
 def topics(request,region_id):
     # trending topics
-    print(' consumerkey: ',comsumer_key,'\n','consumersecret: ',comsumer_secret,'\n','token_key: ',token_key,'\n','token_secret: ',token_secret)
+    # print(' consumerkey: ',comsumer_key,'\n','consumersecret: ',comsumer_secret,'\n','token_key: ',token_key,'\n','token_secret: ',token_secret)
     cliente = oauth2.Client(comsumer, token)
     requisicao = cliente.request('https://api.twitter.com/1.1/trends/place.json?id=' + str(region_id))
     decodificar = requisicao[1].decode()
@@ -40,7 +43,7 @@ def search(request,query):
     twittes = objeto['statuses']
     my_list = []
     for twit in twittes:
-        pprint.pprint(twit)
+        # pprint.pprint(twit)
         my_list.append({
             'name':twit['user']['name'],
             'screen_name':twit['user']['screen_name'],
@@ -48,4 +51,25 @@ def search(request,query):
             'text':twit['text'],
             'id':twit['id_str']
         })
+    saveSearch(query,request)
     return JsonResponse({'twittes': my_list})
+
+def saveSearch(query,request):
+    try:
+        API_ENDPOINT = "https://joelcioapp.herokuapp.com/api/searchs"
+        data = {
+        'searchterm':query,
+        'time':datetime.datetime.now(),
+        'ip':get_client_ip(request)} 
+        response = requests.post(url = API_ENDPOINT, data = data) 
+        print(data,response)
+    except:
+        print("An exception occurred in saveSearch")
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip

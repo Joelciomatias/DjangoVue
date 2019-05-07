@@ -69,7 +69,6 @@ export default {
       }
     },
     researchTerm: function(item){
-      // this.$emit('click-term', item)
       this.$refs.child.searchTwittes(item)
     }
   }
