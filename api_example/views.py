@@ -56,7 +56,7 @@ def search(request,query):
 
 def saveSearch(query,request):
     try:
-        API_ENDPOINT = "https://joelcioapp.herokuapp.com/api/searchs"
+        API_ENDPOINT = "http://localhost:3001/api/searchs"
         data = {
         'searchterm':query,
         'time':datetime.datetime.now(),

@@ -21,19 +21,28 @@
     <br/>
       <b-list-group>
         <div v-for="item in twittes">
-        <b-list-group-item 
-        active class="flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
+        <b-list-group-item id="list-group" >
+        <b-row>
+          <b-col cols="2">
             <b-link id="i-link" :href="'https://twitter.com/'+item.screen_name" target="_blank">
               <b-img id="p_image" :src="item.image_url" ledt="true" height="40" width="40" v-bind="mainProps" rounded="circle" alt="Circle image"></b-img>
             </b-link>
-            <h5 class="mb-1">{{item.screen_name}}</h5>
+          </b-col>
+          <b-col cols="8">
+          <div >
+            <b-row>
+              <h5 class="mb-1">{{item.screen_name}}</h5>
+              </b-row>
+              <b-row>
+            <b-link id="t-link" :href="'https://twitter.com/'+item.screen_name+'/status/'+item.id" target="_blank">
+            <p class="mb-1">
+              {{item.text}}
+            </p>
+            </b-link>
+            </b-row>
           </div>
-          <b-link id="t-link" :href="'https://twitter.com/'+item.screen_name+'/status/'+item.id" target="_blank">
-          <p class="mb-1">
-            {{item.text}}
-          </p>
-          </b-link>
+          </b-col>
+          </b-row>  
         </b-list-group-item>
         <hr/>
         </div>
@@ -57,6 +66,13 @@ export default {
       }
   },
   mounted: function() {
+    let input = document.getElementById("search-here");
+    let that = this;
+    input.addEventListener("keyup", function(event) {
+      if (event.keyCode === 13) {
+        that.searchTwittes(input.value);
+      }
+  });
   },
   methods: {
     searchTwittes: function(searchTerm) {
@@ -77,8 +93,9 @@ export default {
 .UniqueFullWidth .input-group-text {
   width: 48px;
   border-right: none;
-  background-color: #ffffff;
+  background-color: #FBFBFB;
 }
+
 .UniqueFullWidth [class^="fa-"], [class*=" fa-"] {
   display: inline-block;
   width: 100%;
@@ -86,8 +103,13 @@ export default {
 .UniqueFullWidth .LoginInput {
   border-left: none;
 }
+
+#list-group {
+  background-color: #FBFBFB;
+  border: none;
+}
+
 .input-group {
-  /* max-width: 500px; */
   padding:2% 5%;
 }
 .search-icon{
@@ -102,6 +124,7 @@ export default {
   margin-left: -5px;
 }
 h5 {
-    margin:5px auto 0 5px;
+    /* margin:5px auto 0 5px; */
+    color: #5E9FCA;
 }
 </style>
