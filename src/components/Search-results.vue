@@ -13,10 +13,26 @@
                           size="lg" 
                           placeholder="Buscar Tweets"></b-form-input>
             <b-input-group-append>
-              <b-button size="sm" text="Button" @click="searchTwittes(null)" variant="primary">Buscar</b-button>
+            <b-button size="sm" text="Button" @click="searchTwittes(null)" variant="primary">
+                <b-spinner small :type="spinner" ></b-spinner>
+            Buscar</b-button>
             </b-input-group-append>
           </b-input-group>
         </b-col>
+      </b-row>
+
+       <b-row class="text-center">        
+        <b-col cols="12">
+          <b-alert
+      :show="dismissCountDown"
+      dismissible
+      fade
+      variant="warning"
+      @dismiss-count-down="countDownChanged"
+    >
+      Não foram encontrados resultados na pequisa! 
+    </b-alert>
+            </b-col>
       </b-row>
     <br/>
       <b-list-group>
@@ -63,6 +79,11 @@ export default {
         mainProps: { width: 500, height: 400, class: 'm1' },
         twittes:null,
         topics:null,
+        spinner:'none',
+        searchTerm:null,
+        dismissSecs: 5,
+        dismissCountDown: 0,
+        showDismissibleAlert: false
       }
   },
   mounted: function() {
@@ -76,16 +97,38 @@ export default {
   },
   methods: {
     searchTwittes: function(searchTerm) {
+      let that = this;
+      that.changeSpinner();
       let query = document.getElementById('search-here').value || 'brasil'
       query = searchTerm || query
       fetchTwettsSearch(query).then(res => {
         this.twittes = res.data.twittes
+        console.log(this.twittes.length);
+        if(this.twittes.length == 0){
+          that.noSearchResult(searchTerm);
+        }
+        that.changeSpinner();
         if(!searchTerm){
           this.$emit('newSearch', query)
         }
-        // console.log(res.data.twittes);
+      }).catch(function(err){
+        that.changeSpinner();
+        console.error(err);
       })
     },
+    changeSpinner: function(){
+      this.spinner = this.spinner == 'grow' ? 'none' : 'grow';    
+    },
+    noSearchResult:function(term){
+      this.searchTerm = term
+      this.showAlert();
+    },
+    countDownChanged(dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+    },
+    showAlert() {
+        this.dismissCountDown = this.dismissSecs
+    }
   }
 }
 </script>

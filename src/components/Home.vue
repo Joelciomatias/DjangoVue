@@ -76,7 +76,7 @@ export default {
 </script>
 <style>
 #home {
-  background-color: #FBFBFB;
+  background-color: #F5F5F5;
   padding: 50px 15px 15px 15px;
   min-height: 50rem;
 }
